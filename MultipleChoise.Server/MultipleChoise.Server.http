@@ -1,0 +1,6 @@
+@MultipleChoise.Server_HostAddress = http://localhost:5229
+
+GET {{MultipleChoise.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
