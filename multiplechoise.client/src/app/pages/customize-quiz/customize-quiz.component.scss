@@ -1,0 +1,107 @@
+@import '../../@theme/styles/themes.scss';
+
+.customize-quiz {
+  .rounded {
+    border-radius: 1rem !important;
+  }
+
+  .customize-quiz-body {
+    .delete-question {
+      z-index: 100;
+      font-size: 1.15rem;
+      position: absolute;
+      left: auto;
+      right: 19px;
+      top: 5%;
+      transform: translatex(30%) translateY(-50%);
+    }
+
+    .delete-question:hover {
+      color: red !important;
+    }
+
+    textarea {
+      text-align: center;
+    }
+
+    .question {
+      textarea {
+        font-size: 25px;
+        padding-top: 20px;
+        line-height: 1.5;
+      }
+      
+      textarea::placeholder {
+        font-size: 25px;
+        text-align: center;
+        padding-top: 20px;
+      }
+    }
+
+    .answer {
+      display:inline-block;
+      textarea {
+        resize: none;
+        padding: 1rem;
+
+      }
+
+      nb-checkbox {
+        position: absolute;
+        right: 0px;
+        top: 50%;
+        transform: translatex(-150%) translateY(-50%);
+      }
+
+      nb-checkbox {
+        ::ng-deep .custom-checkbox {
+          border-radius: 50% !important;
+        }
+      }
+
+      .delete-icon {
+        display: none;
+        font-size: 1rem;
+        position: absolute;
+        left: 19px;
+        right: auto;
+        top: 30%;
+        transform: translatex(30%) translateY(-65%);
+      }
+
+      .delete-icon:hover {
+        color: red;
+      }
+    }
+
+    .answer:hover {
+      .delete-icon {
+        display: block;
+      }
+    }
+  }
+
+  .center-item {
+    margin: 0 auto;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    @include nb-ltr(padding, 0 0.5rem 0 0.75rem);
+    @include nb-rtl(padding, 0 0.75rem 0 0.5rem);
+    border-left: 1px solid transparent;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .add-question-icon {
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+  }
+}
