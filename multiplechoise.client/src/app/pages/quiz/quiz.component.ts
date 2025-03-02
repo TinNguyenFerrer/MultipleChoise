@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } fro
 import { interval, Subscription } from 'rxjs';
 import { createParticipantInformation, createResult, isParticipantInformationValid, ParticipantInformation } from './model/exame.model';
 import { QuizService } from '../../service/quiz.service';
-import { Answer, createQuiz, Question, Quiz } from '../customize-quiz/customize-model/customize-quiz.model';
+import { Answer, Question, Quiz, shuffleQuiz } from '../customize-quiz/customize-model/customize-quiz.model';
 import { ResultService } from '../../service/result.service';
 
 @Component({
@@ -103,7 +103,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
 
     this.quizService.getByNumber(this.participantInformation?.quizId).subscribe(q => {
-      this.quiz = createQuiz(q);
+      this.quiz = shuffleQuiz(q);
       this.isParticipantInformationReady = true;
       this.startTimer();
       this.resultInfor = null;

@@ -19,12 +19,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/customize-quiz',
     home: true,
   },
-  {
-    title: 'Start Quiz',
-    icon: 'edit-2-outline',
-    link: '/quizz',
-    home: true,
-  },
+  // {
+  //   title: 'Start Quiz',
+  //   icon: 'edit-2-outline',
+  //   link: '/quizz',
+  //   home: true,
+  // },
   // {
   //   title: 'E-commerce',
   //   icon: 'shopping-cart-outline',

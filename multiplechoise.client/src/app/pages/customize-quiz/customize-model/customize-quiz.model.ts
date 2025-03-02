@@ -66,6 +66,29 @@ export function createQuestion(question: Partial<Question>): Question {
   };
 }
 
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]]; // Hoán đổi phần tử
+  }
+  return arr;
+}
+
+export function shuffleQuestions(questions: Question[]): Question[] {
+  return shuffleArray(questions).map(createQuestion);
+}
+
+export function shuffleAnswer(answer: Answer[]): Answer[] {
+  return shuffleArray(answer).map(createAnswer);
+}
+
+export function shuffleQuiz(quiz: Quiz) {
+  const newQuiz = createQuiz(quiz);
+  newQuiz.questions = shuffleQuestions(quiz.questions);
+  newQuiz.questions.forEach(q => q.answers = shuffleAnswer(q.answers));
+  return newQuiz;
+}
+
 export function createQuiz(quiz: Partial<Quiz>): Quiz {
   if (!quiz) {
     return {} as Quiz;

@@ -27,7 +27,7 @@ export class QEchartsPieComponent implements OnChanges, OnDestroy {
         color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
         tooltip: {
           trigger: 'item',
-          formatter: '{a} {b} : <br/> {c} ({d}%)',
+          formatter: '{b} <br/> {c} ({d}%)',
         },
         legend: {
           orient: 'vertical',
