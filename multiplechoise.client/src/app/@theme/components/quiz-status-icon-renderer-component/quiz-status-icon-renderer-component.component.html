@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center">
+  <nb-icon *ngIf="status !== QuizStatus.Ready" icon="alert-triangle" pack="eva" status="danger">
+  </nb-icon>
+
+  <nb-icon *ngIf="status === QuizStatus.Ready" icon="award" pack="eva" status="success">
+  </nb-icon>
+</div>

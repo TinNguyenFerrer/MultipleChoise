@@ -4,7 +4,8 @@ import {
   NbCardModule, NbIconModule,
   NbSelectModule, NbInputModule,
   NbCheckboxModule,
-  NbRadioModule
+  NbRadioModule,
+  NbFormFieldModule
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -24,9 +25,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     NbCheckboxModule,
     NbRadioModule,
+    NbFormFieldModule,
   ],
   declarations: [
-    CustomizeQuizComponent
+    CustomizeQuizComponent,
   ],
 })
 export class CustomizeQuizModule { }

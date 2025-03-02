@@ -1,11 +1,35 @@
 <div class="row customize-quiz">
   <div class="col-xxl-5">
     <div
-      class="h1 py-4 text-primary-active-color text-center"
-      style="color: rgb(216 132 87)"
+      class="h1 py-4 text-primary-active-color text-center quiz-title"
+      [ngClass]="{ 'border-empty-title': (!quiz.title || !quiz.title.trim()) }"
+      (click)="isEditing = true"
     >
-      {{ quiz.title }}
+      <span class="title" *ngIf="!isEditing">
+        {{ quiz.title }}
+      </span>
+      <ng-container *ngIf="isEditing">
+        <input
+          nbInput
+          [(ngModel)]="quiz.title"
+          (blur)="isEditing = false"
+          (keydown.enter)="isEditing = false"
+          fullWidth="true"
+          #inputField
+          [ngClass]="'w-100'"
+          class="col-md-12 col-xxl-5 center-text title"
+        />
+      </ng-container>
     </div>
+
+    <nb-card class="col-6 col-md-4 rounded">
+      <nb-card-body>
+        <nb-form-field>
+          <label class="label-exam-duration my-text label">Duration (minutes)</label>
+          <input nbInput placeholder="Enter duration" type="number" [(ngModel)]="quiz.durationInMinutes" />
+        </nb-form-field>
+      </nb-card-body>
+    </nb-card>
 
     <nb-card class="mb-4 rounded" *ngFor="let question of quiz.questions">
       <nb-card-body class="customize-quiz-body">
@@ -13,6 +37,7 @@
           icon="close"
           pack="eva"
           class="delete-question"
+          *ngIf="quiz.questions.length > 1"
           (click)="onRemoveQuestion(question)"
         ></nb-icon>
         <div class="row">
@@ -25,7 +50,7 @@
               shape="round"
               placeholder="Nhập câu hỏi ở đây"
               class="col-md-12 col-xxl-5 pb-3"
-              [(ngModel)]="question.text"
+              [(ngModel)]="question.content"
             >
             </textarea>
           </div>
@@ -41,7 +66,7 @@
               fullWidth
               shape="round"
               placeholder="Câu trả lời"
-              [(ngModel)]="answer.text"
+              [(ngModel)]="answer.content"
             >
             </textarea>
             <nb-checkbox
@@ -52,6 +77,7 @@
               icon="close"
               pack="eva"
               class="delete-icon"
+              *ngIf="question.answers.length > 1"
               (click)="onRemoveAnswer(question, answer)"
             ></nb-icon>
           </div>

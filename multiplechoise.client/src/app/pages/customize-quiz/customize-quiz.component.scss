@@ -1,8 +1,41 @@
 @import '../../@theme/styles/themes.scss';
 
 .customize-quiz {
+  .my-text {
+    font-family: nb-theme(font-family-primary);
+    color: nb-theme(color-primary-600);
+  }
+
+  .label-exam-duration{
+    font-size: 15px;
+    border-radius: 1rem;
+  }
+
+  .center-text {
+    text-align: center;
+  }
+
   .rounded {
     border-radius: 1rem !important;
+  }
+
+  .quiz-title {
+    .border-empty-title {
+      border: 1px solid transparent;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgb(216 132 87)
+    }
+
+    input {
+      border: 1px solid #3b4d58;
+    }
   }
 
   .customize-quiz-body {

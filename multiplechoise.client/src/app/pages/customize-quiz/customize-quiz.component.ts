@@ -1,35 +1,57 @@
-import { Component } from '@angular/core';
-import { Answer, createAnswer, createQuestion, Question, Quiz } from './customize-model/customize-quiz.model';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Answer, createAnswer, createQuestion, createQuiz, Question, Quiz } from './customize-model/customize-quiz.model';
 import { NbToastrService } from '@nebular/theme';
+import { v4 } from 'uuid';
+import { QuizService } from '../../service/quiz.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-customize-quiz',
   templateUrl: './customize-quiz.component.html',
   styleUrls: ['./customize-quiz.component.scss']
 })
-export class CustomizeQuizComponent {
-  constructor(private toastrService: NbToastrService) {}
-  
+export class CustomizeQuizComponent implements AfterViewChecked, OnInit {
+  isEditing: boolean = false;
+  quizId: string = null;
+
   quiz: Quiz = {
-    id: 1,
-    title: "Bài kiểm tra lập trình",
-    description: "Kiểm tra kiến thức cơ bản về Angular",
+    idTracking: v4(),
+    uniqueNumber: 0,
+    title: "Untitled Quiz",
+    durationInMinutes: 30,
     questions: [
-      {
-        id: 1,
-        text: "Angular là gì?",
-        answers: [
-          { id: 1, text: "Framework", isCorrect: true },
-          { id: 2, text: "Library", isCorrect: false },
-          { id: 3, text: "Tool", isCorrect: false },
-        ],
-      },
+      this.createDefaultEmptyQuestion()
     ],
   };
 
+  @ViewChild('inputField') inputField: ElementRef | undefined;
+
+  constructor(
+    private toastrService: NbToastrService,
+    private quizService: QuizService,
+    private router: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.router.queryParamMap.subscribe(params => {
+      this.quizId = params.get('id') ?? '' as string;
+      if (this.quizId) {
+        this.quizService.getById(this.quizId).subscribe(data => {
+          this.quiz = createQuiz(data);
+        })
+      }
+    });
+  }
+
+  ngAfterViewChecked() {
+    if (this.isEditing && this.inputField) {
+      this.inputField.nativeElement.focus();
+    }
+  }
+
   onIsCorrectChecked(question: Question, rightAnswer: Answer): void {
     question.answers.forEach(answer => {
-      if (answer.id === rightAnswer.id) {
+      if (answer.idTracking && answer.idTracking === rightAnswer.idTracking) {
         answer.isCorrect = true;
       } else {
         answer.isCorrect = false;
@@ -42,7 +64,15 @@ export class CustomizeQuizComponent {
   }
 
   onAddQuestion() {
-    this.quiz.questions.push(createQuestion({ answers: [createAnswer({})]}));
+    this.quiz.questions.push(this.createDefaultEmptyQuestion());
+  }
+
+  private createDefaultEmptyQuestion(): Question {
+    return createQuestion(
+      {
+        answers: [createAnswer({}), createAnswer({}), createAnswer({}), createAnswer({})]
+      }
+    );
   }
 
   onRemoveAnswer(question: Question, answer: Answer, ) {
@@ -60,6 +90,19 @@ export class CustomizeQuizComponent {
   }
 
   onSaveQuiz() {
-    this.toastrService.success('Lưu bài kiểm tra thành công!', 'Thông báo');
+    if (this.quiz.id) {
+      this.quizService.update(this.quiz).subscribe(
+        data => {
+          this.quiz = createQuiz(data);
+          this.toastrService.success('Quiz saved successfully!', 'Notification');
+        });
+      return;
+    }
+
+    this.quizService.create(this.quiz).subscribe(
+      data => {
+        this.quiz = createQuiz(data);
+        this.toastrService.success('Quiz created successfully!', 'Notification');
+      });
   }
 }

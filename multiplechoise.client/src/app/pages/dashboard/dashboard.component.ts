@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators' ;
+import { takeWhile } from 'rxjs/operators';
 import { SolarData } from '../../@core/data/solar';
 
 interface CardSettings {
@@ -89,6 +89,8 @@ export class DashboardComponent implements OnDestroy {
     this.solarService.getSolarData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data) => {
+        console.log(data);
+        
         this.solarValue = data;
       });
   }

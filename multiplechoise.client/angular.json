@@ -37,7 +37,12 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/leaflet/dist/leaflet.css",
-              "src/app/@theme/styles/styles.scss"
+              "src/app/@theme/styles/styles.scss",
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+              "node_modules/ag-grid-community/styles/ag-theme-quartz.css",
+              "node_modules/ag-grid-community/styles/ag-theme-material.css",
+              "node_modules/@nebular/theme/styles/prebuilt/default.scss"
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
@@ -133,7 +138,10 @@
               "node_modules/socicon/css/socicon.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-              "src/app/@theme/styles/styles.scss"
+              "src/app/@theme/styles/styles.scss",
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+              "node_modules/ag-grid-community/styles/ag-theme-quartz.css"
             ],
             "assets": [
               "src/assets",

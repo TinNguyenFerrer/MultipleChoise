@@ -78,6 +78,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
+
+    // const gridTheme = themeName === 'dark' ? 'ag-theme-quartz-dark' : 'ag-theme-quartz';
+    // const gridElement = document.querySelector('ag-grid-angular');
+    // if (gridElement) {
+    //   gridElement.classList.remove('ag-theme-quartz', 'ag-theme-quartz-dark');
+    //   gridElement.classList.add(gridTheme);
+    // }
   }
 
   toggleSidebar(): boolean {
@@ -90,5 +97,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  startQuiz() {    
+    window.open('/quizz', '_blank');
   }
 }

@@ -1,0 +1,64 @@
+<nb-card>
+  <nb-card-header>
+    <span>Quiz Management</span>
+    <button
+      nbButton
+      ghost
+      status="primary"
+      shape="semi-round"
+      class="center-item px-2 mx-0 py-0"
+      (click)="onAddQuiz()"
+    >
+      <nb-icon
+        icon="plus-circle"
+        pack="eva"
+        class="add-question-icon"
+      ></nb-icon>
+    </button>
+  </nb-card-header>
+
+  <nb-card-body>
+  <div class="grid-container"
+  (contextmenu)="onWrapperContextMenu($event)">
+
+  <ag-grid-angular
+      style="width: 100%; height: 100%"
+      [rowData]="listQuiz"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [rowSelection]="rowSelection"
+      [suppressRowClickSelection]="true"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      [class]="themeClass"
+      [rowHeight]="50"
+      [headerHeight]="50"
+      (cellContextMenu)="onCellContextMenu($event)"
+      [gridOptions]="gridOptions"
+      (gridReady)="onGridReady($event)"
+      domLayout="autoHeight"
+    ></ag-grid-angular>
+  </div>
+
+  <div *ngIf="contextMenuVisible" class="custom-context-menu" [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">
+    <nb-card>
+      <nb-card-body class="menu-options">
+        <button nbButton status="info" size="small" (click)="editRow()">
+          <nb-icon icon="edit-outline" pack="eva"></nb-icon>
+          <span>Edit</span>
+        </button>
+        <button nbButton status="danger" size="small" fullWidth (click)="deleteRow()">
+          <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
+          <span>Delete</span>
+        </button>
+        <button nbButton status="warning" size="small" fullWidth (click)="reportsRow()">
+          <nb-icon icon="pie-chart-outline" pack="eva"></nb-icon>
+          <span>Reports</span>
+        </button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  </nb-card-body>
+</nb-card>
+
