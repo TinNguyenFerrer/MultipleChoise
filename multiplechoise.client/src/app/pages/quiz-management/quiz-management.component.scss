@@ -1,0 +1,51 @@
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
+@import '../../@theme/styles/themes';
+// @import 'bootstrap/scss/mixins/breakpoints';
+// @import '@nebular/theme/styles/themes';
+// @import '@nebular/theme/styles/global/breakpoints';
+// @import '@nebular/theme/styles/theming';
+// @import '@nebular/theme/styles/themes/default';
+
+@include nb-install-component() {
+  :root {
+    --card-background-color: nb-theme(card-background-color);
+    --card-text-color: nb-theme(smart-table-fg);
+  }
+
+  .ag-theme-quartz {
+    --ag-background-color:var(--card-background-color);
+    --ag-foreground-color:var(--card-text-color);
+    --ag-secondary-foreground-colo:var(--card-text-color);
+    --ag-data-color:var(--card-text-color);
+    --ag-header-foreground-color:var(--card-text-color);
+  }
+}
+
+.grid-container {
+  position: relative;
+}
+
+/* Style cho menu tùy chỉnh */
+.custom-context-menu {
+  position: fixed;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Style cho phần tử menu (sử dụng Nebular nb-card) */
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}

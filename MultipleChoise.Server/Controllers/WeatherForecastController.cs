@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MultipleChoise.Server.Data.Models.Entity;
+using MultipleChoise.Server.Data.Repositorys;
 
 namespace MultipleChoise.Server.Controllers
 {
@@ -12,10 +14,12 @@ namespace MultipleChoise.Server.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IQuizRepository _quizRepository;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IQuizRepository quizRepository)
         {
             _logger = logger;
+            _quizRepository = quizRepository;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +32,40 @@ namespace MultipleChoise.Server.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+        public class CreateQuizRequest
+        {
+            public string Title { get; set; }
+            public TimeSpan Duration { get; set; }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateQuizAsync([FromBody] CreateQuizRequest request)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid quiz data.");
+            }
+
+            var quiz = new Quiz
+            {
+                Title = request.Title,
+                Duration = new TimeSpan(2,3,1)
+            };
+
+            try
+            {
+                //var t = DateTime.Now.
+                var createdQuiz = await _quizRepository.CreateQuizAsync(quiz);
+                return CreatedAtAction(nameof(CreateQuizAsync), new { id = createdQuiz.Id }, createdQuiz);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return BadRequest("errr");
+
         }
     }
 }

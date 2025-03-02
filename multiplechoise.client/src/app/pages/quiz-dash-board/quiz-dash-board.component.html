@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-xxxl-2 col-md-4" *ngFor="let lightCard of lightCards">
+    <ngx-quiz-status-card [title]="lightCard.title" 
+                          [type]="lightCard.type"
+                          [number]="lightCard.number">
+                          <i [ngClass]="lightCard.iconClass"></i>
+    </ngx-quiz-status-card>
+  </div>
+</div>
+<h2 class="text-center" *ngIf="quiz?.id">{{quiz.title}}</h2>
+<ngx-q-chartjs [data]="dataChart"></ngx-q-chartjs>

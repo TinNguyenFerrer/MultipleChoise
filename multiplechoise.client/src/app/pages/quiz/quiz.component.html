@@ -1,0 +1,108 @@
+<nb-card class="fixed-sidebar" *ngIf="isStartQuiz">
+  <nb-card-header>Question Navigation</nb-card-header>
+  <nb-card-body>
+    <div class="timer mb-3 pb-2">
+      Time remaining: {{ formatTime(currentTime) }}
+    </div>
+
+    <div class="question-list">
+      <button nbButton *ngFor="let q of quiz.questions; let i = index" 
+              size="tiny" 
+              (click)="scrollToQuestion(i)" 
+              class="question-number  mx-1 my-1" 
+              [class.answered]="isAnswered(q)">
+        {{ i + 1 }}
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card class="fixed-sidebar" *ngIf="!isStartQuiz">
+  <nb-card-header>Question Navigation</nb-card-header>
+  <nb-card-body>
+    <div class="timer mb-3 pb-2">
+      Time remaining: 00:00
+    </div>
+
+    <div class="question-list">
+      <button nbButton *ngFor="let q of emptyArray" 
+              size="tiny" 
+              class="question-number mx-1 my-1">
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+<nb-layout>
+  <nb-layout-header fixed><span class="title">{{quiz.title}}</span></nb-layout-header>
+  <nb-layout-column class="main-content">
+    <div *ngIf="isStartQuiz">
+      <div *ngFor="let q of quiz.questions; let i = index" #questionItem id="question-{{i}}">
+        <nb-card style="margin-bottom: 20px;">
+          <nb-card-header>
+            Q{{ i }}: {{ q.content }}
+          </nb-card-header>
+          <nb-card-body>
+            <div class="pb-2" *ngFor="let answer of q?.answers">
+              <nb-checkbox [ngModel]="answer.isSelected" 
+                           (ngModelChange)="selectOption(q, answer, $event)">
+                {{ answer.content }}
+              </nb-checkbox>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <button nbButton status="success" (click)="submitQuiz()">Submit Quiz</button>
+    </div>
+
+    <div class="row" *ngIf="isShowParticipantInformation">
+      <div class="col-md-12">
+        <nb-card>
+          <nb-card-header>User Information</nb-card-header>
+          <nb-card-body>
+            <div class="form-group row">
+              <label for="inputFullName" class="label col-sm-3 form-control-label">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="participantInformation.fullName" nbInput fullWidth id="inputFullName">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputId" class="label col-sm-3 form-control-label">User Id</label>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="participantInformation.participantId"  nbInput fullWidth id="inputId">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputId" class="label col-sm-3 form-control-label">Quiz Id</label>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="participantInformation.quizId" nbInput fullWidth id="inputId">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-sm-3 col-sm-9">
+                <button type="submit" nbButton status="warning"
+                        (click)="startExame()"
+                        [disabled]="!isParticipantInformationValid">Start Exam</button>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+
+    <ng-container *ngIf="isShowResult">
+      <div>
+        <nb-card>
+          <nb-card-header>Quiz Result</nb-card-header>
+          <nb-card-body>
+            <h2>You got {{ resultInfor.correct }} out of {{ resultInfor.total }} correct!</h2>
+            <br/>
+            <h3>Scrore: {{resultInfor.score}}</h3>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </ng-container>
+  </nb-layout-column>
+</nb-layout>
+

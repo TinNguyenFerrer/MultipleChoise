@@ -1,0 +1,140 @@
+@import '../../@theme/styles/themes.scss';
+
+.customize-quiz {
+  .my-text {
+    font-family: nb-theme(font-family-primary);
+    color: nb-theme(color-primary-600);
+  }
+
+  .label-exam-duration{
+    font-size: 15px;
+    border-radius: 1rem;
+  }
+
+  .center-text {
+    text-align: center;
+  }
+
+  .rounded {
+    border-radius: 1rem !important;
+  }
+
+  .quiz-title {
+    .border-empty-title {
+      border: 1px solid transparent;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgb(216 132 87)
+    }
+
+    input {
+      border: 1px solid #3b4d58;
+    }
+  }
+
+  .customize-quiz-body {
+    .delete-question {
+      z-index: 100;
+      font-size: 1.15rem;
+      position: absolute;
+      left: auto;
+      right: 19px;
+      top: 5%;
+      transform: translatex(30%) translateY(-50%);
+    }
+
+    .delete-question:hover {
+      color: red !important;
+    }
+
+    textarea {
+      text-align: center;
+    }
+
+    .question {
+      textarea {
+        font-size: 25px;
+        padding-top: 20px;
+        line-height: 1.5;
+      }
+      
+      textarea::placeholder {
+        font-size: 25px;
+        text-align: center;
+        padding-top: 20px;
+      }
+    }
+
+    .answer {
+      display:inline-block;
+      textarea {
+        resize: none;
+        padding: 1rem;
+
+      }
+
+      nb-checkbox {
+        position: absolute;
+        right: 0px;
+        top: 50%;
+        transform: translatex(-150%) translateY(-50%);
+      }
+
+      nb-checkbox {
+        ::ng-deep .custom-checkbox {
+          border-radius: 50% !important;
+        }
+      }
+
+      .delete-icon {
+        display: none;
+        font-size: 1rem;
+        position: absolute;
+        left: 19px;
+        right: auto;
+        top: 30%;
+        transform: translatex(30%) translateY(-65%);
+      }
+
+      .delete-icon:hover {
+        color: red;
+      }
+    }
+
+    .answer:hover {
+      .delete-icon {
+        display: block;
+      }
+    }
+  }
+
+  .center-item {
+    margin: 0 auto;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    @include nb-ltr(padding, 0 0.5rem 0 0.75rem);
+    @include nb-rtl(padding, 0 0.75rem 0 0.5rem);
+    border-left: 1px solid transparent;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .add-question-icon {
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+  }
+}

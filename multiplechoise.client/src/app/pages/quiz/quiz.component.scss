@@ -1,0 +1,199 @@
+// @use '@nebular/theme/styles/theming' as *;
+// @use '@nebular/theme/styles/globals' as *;
+
+// @forward '@nebular/theme/styles/theming';
+// @use '@nebular/theme/styles/theming' as *;
+// @use '@nebular/theme/styles/themes/default';
+
+// $nb-themes: nb-register-theme((
+//   layout-padding-top: 2.25rem,
+//   layout-padding: 2.25rem,
+//   menu-item-icon-margin: 0 0.5rem 0 0,
+//   card-height-tiny: 13.5rem,
+//   card-height-small: 21.1875rem,
+//   card-height-medium: 28.875rem,
+//   card-height-large: 36.5625rem,
+//   card-height-giant: 44.25rem,
+//   card-margin-bottom: 1.875rem,
+//   card-header-with-select-padding-top: 0.5rem,
+//   card-header-with-select-padding-bottom: 0.5rem
+// ), default, default);
+
+// @include nb-install() {
+//   @include nb-theme-global();
+// }
+
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+// body {
+//   margin: 0;
+//   font-family: 'Open Sans', sans-serif;
+// }
+
+// .quiz-container {
+//   display: flex;
+//   min-height: 100vh;
+// }
+
+// .question-nav {
+//   width: 250px;
+//   padding: 1rem;
+//   background-color: nb-theme(background-basic-color-2);
+// }
+
+// .question-content {
+//   flex: 1;
+//   padding: 2rem;
+// }
+
+// .timer {
+//   font-size: 1.5rem;
+//   margin-bottom: 1rem;
+//   color: nb-theme(text-basic-color);
+// }
+
+// .question-number {
+//   margin-bottom: 0.5rem;
+//   cursor: pointer;
+//   padding: 0.5rem;
+//   border-radius: nb-theme(border-radius);
+// }
+
+// .question-number:hover {
+//   background-color: nb-theme(background-basic-color-3);
+// }
+
+// .question-number.active {
+//   background-color: nb-theme(color-primary-500);
+//   color: nb-theme(text-control-color);
+// }
+
+// .question {
+//   margin-bottom: 2rem;
+// }
+
+// .answers {
+//   margin-top: 1rem;
+// }
+
+// .submit-btn {
+//   margin-top: 2rem;
+// }
+
+.fixed-sidebar {
+  position: fixed;
+  top: 111px; /* Điều chỉnh theo chiều cao header */
+  left: 0;
+  width: 230px; /* Chiều rộng sidebar */
+  overflow: auto;
+  padding: 10px;
+  z-index: 1000;
+  margin: 0px;
+    padding: 0px;
+    margin-left: 15px;
+}
+
+nb-card.fixed-sidebar {
+
+  // nb-card {
+  //   margin: 0px;
+  //   padding: 0px;
+  //   margin-left: 15px;
+  // }
+
+  nb-sidebar {
+    background-color: #f7f9fc;
+    border-right: 1px solid #e0e0e0;
+  }
+
+  nb-card-header {
+    background-color: #3366ff;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  nb-card-body {
+    padding: 1rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+    color: #ff4081;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .question-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .question-number {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .question-number:hover {
+    background-color: #3f51b5;
+    color: #fff;
+  }
+
+  .question-number.answered {
+    background-color: #ffa726;
+    color: #fff;
+  }
+
+  .question-number.active {
+    background-color: #3f51b5;
+    color: #fff;
+  }
+
+}
+nb-layout-column {
+  padding: 20px;
+}
+
+nb-card {
+  width: 100%;
+}
+
+nb-checkbox {
+  ::ng-deep .custom-checkbox {
+    border-radius: 50% !important;
+  }
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgb(216 132 87)
+}
+
+/* Đặt sidebar cố định bên trái */
+// .fixed-sidebar {
+//   position: fixed;
+//   top: 104px; /* Chiều cao header (có thể điều chỉnh theo chiều cao thực tế) */
+//   left: 0;
+//   width: 450px; /* Đặt width cố định cho sidebar */
+//   height: calc(100% - 64px);
+//   overflow: auto;
+//   padding: 10px;
+//   z-index: 1000; /* Đảm bảo nó nằm trên nội dung chính */
+// }
+
+/* Đẩy nội dung chính sang bên phải để không bị che bởi sidebar */
+.main-content {
+  margin-left: 270px; /* Lớn hơn width của sidebar */
+  padding: 20px;
+}
+

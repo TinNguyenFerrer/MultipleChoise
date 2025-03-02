@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header>
+    Quiz Results
+  </nb-card-header>
+  <nb-card-body>
+    <p>Total Questions: {{ results.total }}</p>
+    <p>Correct Answers: {{ results.correct }}</p>
+    <p>Score: {{ results.percentage.toFixed(2) }}%</p>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="primary" (click)="close()">Close</button>
+  </nb-card-footer>
+</nb-card>
